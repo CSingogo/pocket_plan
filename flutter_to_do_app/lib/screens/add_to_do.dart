@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../todo_list.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_to_do_app/providers/todo_provider.dart';
 
 class AddToDoForm extends StatefulWidget {
   const AddToDoForm({super.key});
@@ -41,8 +42,16 @@ class _AddToDoFormState extends State<AddToDoForm> {
               onPressed: () {
                 // Handle adding the to-do item
                 setState(() {
-                  toDos.add(_newToDo);
+                  Provider.of<TodoProvider>(context, listen: false)
+                      .addToDo(_newToDo);
                 });
+
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('To-Do Added'),
+                    backgroundColor: Colors.green,
+                  ),
+                );
                 Navigator.pop(context);
               },
               child: const Text('Add ToDo'),

@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_to_do_app/screens/add_to_do.dart';
-import './todo_list.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_to_do_app/providers/todo_provider.dart';
 
-const snackBar = SnackBar(
+const successSnackBar = SnackBar(
   content: Center(
     child: Text(
       'Contact Added',
+      style: TextStyle(color: Colors.white, fontSize: 26),
+    ),
+  ),
+);
+
+const errorSnackBar = SnackBar(
+  content: Center(
+    child: Text(
+      'Theres an Error',
       style: TextStyle(color: Colors.white, fontSize: 26),
     ),
   ),
@@ -24,12 +34,6 @@ class _HomePageState extends State<HomePage> {
     // Access the ColorScheme from the theme
     final colorScheme = Theme.of(context).colorScheme;
 
-    void addToDo(String item) {
-      setState(() {
-        toDos.add(item);
-      });
-    }
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: colorScheme.inversePrimary,
@@ -40,10 +44,10 @@ class _HomePageState extends State<HomePage> {
           //const SizedBox(height: 600),
           Expanded(
             child: ListView.builder(
-              itemCount: toDos.length,
+              itemCount: Provider.of<TodoProvider>(context).toDos.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(toDos[index]),
+                  title: Text(Provider.of<TodoProvider>(context).toDos[index]),
                 );
               },
             ),
