@@ -34,28 +34,43 @@ class _AddToDoFormState extends State<AddToDoForm> {
               ),
             ),
             ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   final newTodoTitle = _controller.text.trim();
                   if (newTodoTitle.isNotEmpty) {
                     final newTodo = Todo(
                       id: DateTime.now()
                           .millisecondsSinceEpoch
-                          .toInt(), // Generate a unique ID
+                          .toString(), // Generate a unique ID
                       title: newTodoTitle,
                       completed: false, // Default value
                     );
 
-                    Provider.of<TodoProvider>(context, listen: false)
-                        .addToDo(newTodo);
+                    final response =
+                        await Provider.of<TodoProvider>(context, listen: false)
+                            .createTodo(context, newTodo);
                     // Clear the input field
                     _controller.clear();
 
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('To-Do Added'),
-                        backgroundColor: Colors.green,
-                      ),
-                    );
+                    // Check if the widget is still mounted
+                    if (!mounted) return;
+
+                    if (response.statusCode == 201) {
+                      // Show success SnackBar
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('To-Do Added'),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+                    } else {
+                      // Show error SnackBar
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Failed to add To-Do'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                    }
                     Navigator.pop(context);
                   }
                 },

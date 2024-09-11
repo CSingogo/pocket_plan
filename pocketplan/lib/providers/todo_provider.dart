@@ -26,11 +26,6 @@ class TodoProvider with ChangeNotifier {
     ),
   );
 
-  void addToDo(Todo todo) {
-    _toDos.add(todo);
-    notifyListeners();
-  }
-
   //fetch logic for todos
   Future<void> fetchTodos() async {
     final response = await http.get(Uri.parse('http://localhost:3000/todos'));
@@ -45,17 +40,31 @@ class TodoProvider with ChangeNotifier {
     }
   }
 
-    //POST logic for todos
-  Future<void> postTodo() async {
-    final response = await http.get(Uri.parse('http://localhost:3000/todos'));
+  //POST logic for todos
+  Future<http.Response> createTodo(BuildContext context, Todo todo) async {
+    final response = await http.post(
+      Uri.parse('http://localhost:3000/todos'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(todo.toJson()),
+    );
+    fetchTodos();
 
-    if (response.statusCode == 200) {
-      final List<dynamic> fetchedData = json.decode(response.body);
-      _toDos = fetchedData.map((data) => Todo.fromJson(data)).toList();
-      print('Fetched todos : $_toDos');
-      notifyListeners();
-    } else {
-      throw Exception('Failed to fetch todos');
-    }
+    return response;
   }
+
+  // DELETE logic for todos
+  Future<http.Response> deleteTodo(String id) async {
+    final response = await http.delete(
+      Uri.parse('http://localhost:3000/todos/$id'),
+       headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    );
+    fetchTodos();
+    return response;
+  }
+
+
 }

@@ -1,5 +1,5 @@
 class Todo {
-  final int id;
+  final String id;
   final String title;
   final bool completed;
 
@@ -9,11 +9,18 @@ class Todo {
     required this.completed,
   });
 
+  // Convert a Todo into a Map. The keys must correspond to the names of the JSON properties.
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'title': title,
+        'completed': completed,
+      };
+
   factory Todo.fromJson(Map<String, dynamic> json) {
     return Todo(
-      id: int.parse(json['id']),
-      title: json['title'],
-      completed: json['completed'],
+      id: json['id'] as String,
+      title: json['title'] as String,
+      completed: json['completed'] as bool,
     );
   }
 }
