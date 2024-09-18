@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_to_do_app/home.dart';
+import 'package:flutter_to_do_app/screens/home.dart';
 import 'package:flutter_to_do_app/providers/todo_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -14,15 +14,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme:
-            ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 0, 0, 0)),
-        useMaterial3: true,
-      ),
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }

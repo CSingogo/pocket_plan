@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_to_do_app/models/todo_model.dart';
+import 'package:flutter_to_do_app/providers/todo_provider.dart';
 import 'package:flutter_to_do_app/screens/add_to_do.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_to_do_app/providers/todo_provider.dart';
-import 'package:flutter/cupertino.dart';
 
 const successSnackBar = SnackBar(
   content: Center(
@@ -32,15 +31,14 @@ const errorSnackBar = SnackBar(
   ),
 );
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class TaskPage extends StatefulWidget {
+  const TaskPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<TaskPage> createState() => _TaskPageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  @override
+class _TaskPageState extends State<TaskPage> {
   void initState() {
     super.initState();
     // Fetch todos when the widget is initialized
@@ -52,18 +50,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // Access the ColorScheme from the theme
-    // final colorScheme = Theme.of(context).colorScheme;
-
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.grey[700],
-        title: const Text(' Task + Treasure',
-            style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 2)),
-      ),
       body: Container(
         color: Colors.black,
         child: Consumer<TodoProvider>(
@@ -179,22 +166,6 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.grey[700],
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(
-                CupertinoIcons.check_mark_circled,
-                color: Colors.white,
-                size: 50,
-              ),
-              label: 'Task',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.lock, color: Colors.white, size: 50),
-              label: 'Treasure',
-            ),
-          ]),
     );
   }
 }
