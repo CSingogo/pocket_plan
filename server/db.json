@@ -4,26 +4,6 @@
       "id": "1725963942022",
       "title": "eat cake",
       "completed": false
-    },
-    {
-      "id": "1725964813929",
-      "title": "eat food",
-      "completed": false
-    },
-    {
-      "id": "1725965346538",
-      "title": "random to-do",
-      "completed": false
-    },
-    {
-      "id": "1725976883152",
-      "title": "study",
-      "completed": false
-    },
-    {
-      "id": "1726575841564",
-      "title": "eating",
-      "completed": false
     }
   ],
   "piggyBank": [
@@ -37,5 +17,26 @@
       "amount": 20,
       "description": "Saved from gift"
     }
-  ]
+  ],
+  "transactions": [
+    {
+      "id": "25db",
+      "type": "income",
+      "amount": 1000,
+      "description": "salary"
+    },
+    {
+      "id": "0e8a",
+      "type": "expense",
+      "amount": 200,
+      "description": "drinks"
+    }
+  ],
+  "balance": {
+    "item": {
+      "item": {},
+      "total": 1000
+    },
+    "total": 800
+  }
 }

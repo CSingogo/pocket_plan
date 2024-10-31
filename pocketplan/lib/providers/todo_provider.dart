@@ -33,7 +33,7 @@ class TodoProvider with ChangeNotifier {
     if (response.statusCode == 200) {
       final List<dynamic> fetchedData = json.decode(response.body);
       _toDos = fetchedData.map((data) => Todo.fromJson(data)).toList();
-      print('Fetched todos : $_toDos');
+     
       notifyListeners();
     } else {
       throw Exception('Failed to fetch todos');

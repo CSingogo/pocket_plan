@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_to_do_app/models/todo_model.dart';
-import 'package:flutter_to_do_app/screens/add_to_do.dart';
 import 'package:flutter_to_do_app/screens/finance_page.dart';
 import 'package:flutter_to_do_app/screens/task_page.dart';
 import 'package:provider/provider.dart';
